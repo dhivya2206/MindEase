@@ -5,8 +5,19 @@
 
 import axios from 'axios';
 
+const getBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
+  if (typeof window !== 'undefined') {
+    if (window.location.port === '5173') {
+      return `${window.location.protocol}//${window.location.hostname}:5000`;
+    }
+    return window.location.origin;
+  }
+  return 'http://localhost:5000';
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  baseURL: getBaseUrl(),
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
