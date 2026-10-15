@@ -1,0 +1,236 @@
+/* ============================================================
+   MindEase — Global Stylesheet
+   Design System:
+   - Color palette: Deep purple + mint + soft neutrals
+   - Typography: Inter (body) + Outfit (headings)
+   - Dark mode: CSS class-based (.dark on <html>)
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ── Custom Theme Tokens ───────────────────────────────────── */
+@theme {
+  /* Brand colors */
+  --color-brand-50: #f0eeff;
+  --color-brand-100: #e2dcff;
+  --color-brand-200: #c8bcff;
+  --color-brand-300: #a48dff;
+  --color-brand-400: #8b6dff;
+  --color-brand-500: #6c63ff;
+  --color-brand-600: #5a4fd9;
+  --color-brand-700: #4a3db3;
+  --color-brand-800: #3a2f8c;
+  --color-brand-900: #2a2166;
+
+  /* Accent — Mint */
+  --color-mint-400: #4ecdc4;
+  --color-mint-500: #2dbdb5;
+  --color-mint-600: #1da39b;
+
+  /* Accent — Coral */
+  --color-coral-400: #ff6b6b;
+  --color-coral-500: #e05555;
+
+  /* Neutrals */
+  --color-surface-50: #f8f7ff;
+  --color-surface-100: #f1f0fe;
+  --color-surface-900: #0f0e1a;
+  --color-surface-800: #1a1830;
+  --color-surface-700: #252345;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+
+  /* Radius */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+/* ── Base Styles ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface-50);
+  color: #1a1a2e;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode body */
+.dark body {
+  background-color: var(--color-surface-900);
+  color: #e8e6ff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-300);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-500); }
+
+/* ── Selection ────────────────────────────────────────────── */
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-900);
+}
+
+/* ── Utility Classes ──────────────────────────────────────── */
+.gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-mint-400) 100%);
+}
+
+.gradient-brand-text {
+  background: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-mint-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dark .glass {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(108, 99, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(108, 99, 255, 0.6); }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.6s ease forwards; }
+.animate-scale-in { animation: scaleIn 0.4s ease forwards; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ── Button Base ─────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600));
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(108, 99, 255, 0.5);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-brand-500);
+  border: 2px solid var(--color-brand-300);
+}
+
+.btn-ghost:hover {
+  background: var(--color-brand-50);
+  border-color: var(--color-brand-500);
+  transform: translateY(-2px);
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: var(--radius-2xl);
+  padding: 1.75rem;
+  box-shadow: 0 2px 24px rgba(108, 99, 255, 0.06);
+  border: 1px solid rgba(108, 99, 255, 0.08);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 40px rgba(108, 99, 255, 0.14);
+  transform: translateY(-3px);
+}
+
+.dark .card {
+  background: var(--color-surface-800);
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Glow Orb (decorative) ───────────────────────────────── */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
