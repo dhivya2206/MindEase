@@ -129,12 +129,21 @@ function AppRoutes() {
   );
 }
 
+const getBasename = () => {
+  if (typeof window === 'undefined') return '';
+  const match = window.location.pathname.match(/^(\/[^/]+)/);
+  if (match && match[1].toLowerCase() === '/mindease') {
+    return match[1];
+  }
+  return '';
+};
+
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <NotificationProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={getBasename()}>
             <AppRoutes />
           </BrowserRouter>
         </NotificationProvider>

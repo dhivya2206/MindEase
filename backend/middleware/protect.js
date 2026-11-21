@@ -1,3 +1,4 @@
+
 /**
  * middleware/protect.js
  * JWT authentication middleware — Part 3.
