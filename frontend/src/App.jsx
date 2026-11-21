@@ -23,7 +23,7 @@
  *   *                           → NotFoundPage
  */
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider }        from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { NotificationProvider }  from './context/NotificationContext';
@@ -129,23 +129,14 @@ function AppRoutes() {
   );
 }
 
-const getBasename = () => {
-  if (typeof window === 'undefined') return '';
-  const match = window.location.pathname.match(/^(\/[^/]+)/);
-  if (match && match[1].toLowerCase() === '/mindease') {
-    return match[1];
-  }
-  return '';
-};
-
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <NotificationProvider>
-          <BrowserRouter basename={getBasename()}>
+          <HashRouter>
             <AppRoutes />
-          </BrowserRouter>
+          </HashRouter>
         </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>
