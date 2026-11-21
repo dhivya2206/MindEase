@@ -10,6 +10,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { existsSync } from 'fs';
@@ -67,6 +68,7 @@ app.use(
 app.use('/api/auth', authLimiter);
 
 // ── Parsing ───────────────────────────────────────────────────────────────────
+app.use(compression());
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser()); // needed for logout cookie clearing & future refresh tokens
